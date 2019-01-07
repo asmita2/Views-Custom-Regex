@@ -1,0 +1,12 @@
+<?php
+
+/**
+* Implements hook_plugins_filter_alter().
+*/
+function views_custom_regex_views_plugins_filter_alter(array &$plugins) {
+
+  // Change the 'title' handler class.
+  $plugins['string']['class'] = 'Drupal\custom_regex\Plugin\views\filter\RegularExpressionStringFilter';
+  $plugins['numeric']['class'] = 'Drupal\custom_regex\Plugin\views\filter\RegularExpressionNumericFilter';
+  $plugins['combine']['class'] = 'Drupal\custom_regex\Plugin\views\filter\RegularExpressionCombinedFilter';
+}
