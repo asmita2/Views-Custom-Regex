@@ -3,7 +3,6 @@
 namespace Drupal\views_custom_regex\Plugin\views\filter;
 
 use Drupal\views\Plugin\views\filter\Combine;
-use Drupal\Core\Form\FormStateInterface;
 
 /**
  * Filter handler which allows to search on multiple fields.

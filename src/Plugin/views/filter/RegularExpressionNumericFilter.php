@@ -3,7 +3,6 @@
 namespace Drupal\views_custom_regex\Plugin\views\filter;
 
 use Drupal\views\Plugin\views\filter\NumericFilter;
-use Drupal\Core\Form\FormStateInterface;
 
 /**
  * Simple filter to handle greater than/less than filters.
