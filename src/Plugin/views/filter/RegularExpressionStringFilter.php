@@ -67,6 +67,7 @@ class RegularExpressionStringFilter extends StringFilter {
       '#type' => 'textfield',
       '#default_value' => $this->options['expose']['regex'],
       '#title' => $this->t('Regular Expression'),
+      '#description' => $this->t('Enter a regular expression (regex or regexp for short),a special text string describing the search pattern. Example: [^abc] The expression is used to find any character NOT between the brackets'),
       '#size' => 20,
       '#states' => [
         'visible' => [
