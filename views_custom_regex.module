@@ -1,8 +1,13 @@
 <?php
 
 /**
-* Implements hook_plugins_filter_alter().
-*/
+ * @file
+ * Contains custom code.
+ */
+
+/**
+ * Implements hook_plugins_filter_alter().
+ */
 function views_custom_regex_views_plugins_filter_alter(array &$plugins) {
 
   // Change the 'title' handler class.
