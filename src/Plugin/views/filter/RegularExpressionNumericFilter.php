@@ -50,7 +50,7 @@ class RegularExpressionNumericFilter extends NumericFilter {
       '#type' => 'textfield',
       '#default_value' => $this->options['expose']['regex'],
       '#title' => $this->t('Regular Expression'),
-      '#description' => $this->t('Enter a regular expression (regex or regexp for short),a special text string describing the search pattern. Example: [^abc] The expression is used to find any character NOT between the brackets'),
+      '#description' => $this->t('Enter a regular expression. Example: [^abc] The expression is used to find any character NOT between the brackets'),
       '#size' => 20,
       '#states' => [
         'visible' => [
@@ -71,11 +71,12 @@ class RegularExpressionNumericFilter extends NumericFilter {
     // Checks if Regular Expression Field is empty
     // if empty then in that case default drupal query of Filter will execute.
     if (!empty($regex_field)) {
+      // Depending on position selected Regular expression,
+      // will be appended in the Query.
       $this->query->addWhereExpression($this->options['group'], "$field REGEXP ' $regex_field$this->value'");
     }
     else {
-      // Regular expression field is empty in that case
-      // default drupal query will execute.
+      // If Regular expression field is empty then use default query.
       $this->query->addWhere($this->options['group'], $field, $this->value, 'REGEXP');
     }
   }

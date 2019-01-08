@@ -48,6 +48,19 @@ class RegularExpressionStringFilter extends StringFilter {
   public function buildExposeForm(&$form, FormStateInterface $form_state) {
     parent::buildExposeForm($form, $form_state);
 
+    $form['expose']['regex'] = [
+      '#type' => 'textfield',
+      '#default_value' => $this->options['expose']['regex'],
+      '#title' => $this->t('Regular Expression'),
+      '#description' => $this->t('Enter a regular expression. Example: [^abc] The expression is used to find any character NOT between the brackets'),
+      '#size' => 20,
+      '#states' => [
+        'visible' => [
+          'select[name="options[operator]"]' => ['value' => 'regular_expression'],
+        ],
+      ],
+    ];
+
     $form['expose']['position'] = [
       '#type' => 'radios',
       '#default_value' => $this->options['expose']['position'],
@@ -57,19 +70,6 @@ class RegularExpressionStringFilter extends StringFilter {
         'prefix' => $this->t('Regex Prefix'),
         'suffix' => $this->t('Regex Suffix'),
       ],
-      '#states' => [
-        'visible' => [
-          'select[name="options[operator]"]' => ['value' => 'regular_expression'],
-        ],
-      ],
-    ];
-
-    $form['expose']['regex'] = [
-      '#type' => 'textfield',
-      '#default_value' => $this->options['expose']['regex'],
-      '#title' => $this->t('Regular Expression'),
-      '#description' => $this->t('Enter a regular expression (regex or regexp for short),a special text string describing the search pattern. Example: [^abc] The expression is used to find any character NOT between the brackets'),
-      '#size' => 20,
       '#states' => [
         'visible' => [
           'select[name="options[operator]"]' => ['value' => 'regular_expression'],
@@ -89,14 +89,13 @@ class RegularExpressionStringFilter extends StringFilter {
     // Checks if Regular Expression Field is empty
     // if empty then in that case default drupal query of Filter will execute.
     if (!empty($regex_field)) {
-      // Depending on postion selected Regular expression will be
+      // Depending on position selected Regular expression will be
       // appended in the Query.
       $value = ($this->options['expose']['position'] == 'prefix') ? $this->options['expose']['regex'] . $this->value : $this->value . $this->options['expose']['regex'];
       $this->query->addWhereExpression($this->options['group'], "$field REGEXP '$value'");
     }
     else {
-      // Regular expression field is empty in that case
-      // default drupal query will execute.
+      // If Regular expression field is empty then use default query.
       $this->query->addWhere($this->options['group'], $field, $this->value, 'REGEXP');
     }
   }
