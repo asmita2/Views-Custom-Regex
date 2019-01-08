@@ -3,6 +3,7 @@
 namespace Drupal\views_custom_regex\Plugin\views\filter;
 
 use Drupal\views\Plugin\views\filter\StringFilter;
+use Drupal\Core\Form\FormStateInterface;
 
 /**
  * Custom regular expression filter.

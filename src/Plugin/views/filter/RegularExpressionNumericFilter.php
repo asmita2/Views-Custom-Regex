@@ -3,6 +3,7 @@
 namespace Drupal\views_custom_regex\Plugin\views\filter;
 
 use Drupal\views\Plugin\views\filter\NumericFilter;
+use Drupal\Core\Form\FormStateInterface;
 
 /**
  * Simple filter to handle greater than/less than filters.
@@ -49,6 +50,7 @@ class RegularExpressionNumericFilter extends NumericFilter {
       '#type' => 'textfield',
       '#default_value' => $this->options['expose']['regex'],
       '#title' => $this->t('Regular Expression'),
+      '#description' => $this->t('Enter a regular expression (regex or regexp for short),a special text string describing the search pattern. Example: [^abc] The expression is used to find any character NOT between the brackets'),
       '#size' => 20,
       '#states' => [
         'visible' => [
