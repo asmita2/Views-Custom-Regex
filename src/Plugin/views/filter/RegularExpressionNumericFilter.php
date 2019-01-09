@@ -13,6 +13,7 @@ use Drupal\Core\Form\FormStateInterface;
  * @ViewsFilter("numeric")
  */
 class RegularExpressionNumericFilter extends NumericFilter {
+  use RegularExpressionTrait;
 
   /**
    * Overrides defineOptions function.
@@ -67,18 +68,8 @@ class RegularExpressionNumericFilter extends NumericFilter {
    *   The expression pointing to the queries field, for example "foo.bar".
    */
   protected function opRegex($field) {
-    $regex_field = $this->options['expose']['regex'];
-    // Checks if Regular Expression Field is empty
-    // if empty then in that case default drupal query of Filter will execute.
-    if (!empty($regex_field)) {
-      // Depending on position selected Regular expression,
-      // will be appended in the Query.
-      $this->query->addWhereExpression($this->options['group'], "$field REGEXP ' $regex_field$this->value'");
-    }
-    else {
-      // If Regular expression field is empty then use default query.
-      $this->query->addWhere($this->options['group'], $field, $this->value, 'REGEXP');
-    }
+    // Call to regular expression query method from ReqularExpressionTrait.
+    $this->regexquery($field, $this->options);
   }
 
 }

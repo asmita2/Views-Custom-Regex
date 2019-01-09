@@ -13,6 +13,7 @@ use Drupal\Core\Form\FormStateInterface;
  * @ViewsFilter("combine")
  */
 class RegularExpressionCombinedFilter extends Combine {
+  use RegularExpressionTrait;
 
   /**
    * Overrides defineOptions function.
@@ -88,19 +89,8 @@ class RegularExpressionCombinedFilter extends Combine {
    *   The expression pointing to the queries field, for example "foo.bar".
    */
   protected function opRegex($field) {
-    $regex_field = $this->options['expose']['regex'];
-    // Checks if Regular Expression Field is empty
-    // if empty then in that case default drupal query of Filter will execute.
-    if (!empty($regex_field)) {
-      // Depending on position selected Regular expression,
-      // will be appended in the Query.
-      $value = ($this->options['expose']['position'] == 'prefix') ? $this->options['expose']['regex'] . $this->value : $this->value . $this->options['expose']['regex'];
-      $this->query->addWhereExpression($this->options['group'], "$field REGEXP '$value'");
-    }
-    else {
-      // If Regular expression field is empty then use default query.
-      $this->query->addWhere($this->options['group'], $field, $this->value, 'REGEXP');
-    }
+    // Call to regular expression query method from ReqularExpressionTrait.
+    $this->regexquery($field, $this->options);
   }
 
 }
