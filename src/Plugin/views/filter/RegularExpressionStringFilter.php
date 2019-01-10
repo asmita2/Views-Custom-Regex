@@ -66,7 +66,7 @@ class RegularExpressionStringFilter extends StringFilter {
       '#type' => 'radios',
       '#default_value' => $this->options['expose']['position'],
       '#title' => $this->t('Regex position'),
-      '#description' => $this->t('Select postion of regular expression'),
+      '#description' => $this->t('Select position of regular expression.Example: 1.Prefix [^abc]filter-value 2.Suffix filter-value[^abc]'),
       '#options' => [
         'prefix' => $this->t('Regex Prefix'),
         'suffix' => $this->t('Regex Suffix'),
