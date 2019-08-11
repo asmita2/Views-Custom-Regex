@@ -2,8 +2,26 @@
 
 /**
  * @file
- * Contains custom code.
+ * Contains views_custom_regex.module.
  */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function my_migrate_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the my_migrate module.
+    case 'help.page.views_custom_regex':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Allows to add Custom Regular expression in views for filters.') . '</p>';
+      return $output;
+
+    default:
+  }
+}
 
 /**
  * Implements hook_plugins_filter_alter().
